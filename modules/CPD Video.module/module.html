@@ -1,0 +1,285 @@
+
+<div class="cpd-records-reveal-btn" data-contactid="{{ request_contact.contact.hs_object_id }}" >
+  <button id="toggle-btn" class="toggle-form">Take notes and mark video as watched</button>
+</div>
+
+<div class="card-container cpd-records">
+  <div class="box-header-conta">
+    <div>Notes</div>
+    <div class="search-icon">🖋️</div>
+  </div>
+
+  <div class="video-container">
+  </div>
+
+  <div class="rating">
+    <span class="rating-label">Rating</span>
+    <div class="stars">
+      <!-- Stars in reverse order for CSS selection to work properly -->
+      <input type="radio" name="rating" id="star5" value="5">
+      <label for="star5">★</label>
+
+      <input type="radio" name="rating" id="star4" value="4">
+      <label for="star4">★</label>
+
+      <input type="radio" name="rating" id="star3" value="3">
+      <label for="star3">★</label>
+
+      <input type="radio" name="rating" id="star2" value="2">
+      <label for="star2">★</label>
+
+      <input type="radio" name="rating" id="star1" value="1">
+      <label for="star1">★</label>
+    </div>
+  </div>
+
+  <div class="input-group">
+    <input type="text" id="notes" class="form-input" placeholder="Notes">
+  </div>
+
+  <div class="input-group">
+    <input id="feedback" type="text" class="form-input" placeholder="How will this improve your practice">
+  </div>
+
+  <div class="checkbox-group">
+    <input type="checkbox" id="watched" class="checkbox-input">
+    <label for="watched" class="checkbox-label">I watched this</label>
+  </div>
+
+  <button class="submit-btn">Submit Training</button>
+</div>
+
+
+{% require_js %}
+<script> 
+document.addEventListener("DOMContentLoaded", () => {
+    // Note taking and posting
+    const toggleBtn = document.querySelector("#toggle-btn");
+    const recordsForm = document.querySelector(".cpd-records");
+
+    toggleBtn.addEventListener("click", () => {
+        if (recordsForm.style.display === "none" || recordsForm.style.display === "") {
+            recordsForm.style.display = "block"; 
+        } else {
+            recordsForm.style.display = "none"; 
+        }
+    });
+});
+
+</script>
+{% end_require_js%}
+
+
+
+{% require_css %}
+<style>
+  :root {
+    --primary-color: #7dc2c3;
+    --secondary-color: #f8f9fa;
+    --border-color: #e0e0e0;
+    --text-color: #333;
+    --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    --star-active: #ffc107;
+    --star-inactive: #d4d4d4;
+  }
+
+  .cpd-records {
+    width: 100%;
+    display: none;
+    background-color: white;
+    border-radius: 12px;
+    box-shadow: var(--shadow);
+    padding: 30px;
+    border: 1px solid var(--border-color);
+    margin: 20px 0;
+  }
+
+  .cpd-records .embed_container iframe {
+    border-radius: 10px;
+  }
+
+  .cpd-records .box-header-conta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--border-color);
+  }
+
+  .cpd-records .box-header-conta div {
+    font-size: 1.5rem;
+    color: var(--primary-color);
+    font-weight: 500;
+  }
+
+  .cpd-records .search-icon {
+    color: #777;
+    font-size: 1.2rem;
+  }
+
+  .cpd-records .video-container {
+    width: 100%;
+    position: relative;
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .cpd-records .video-placeholder {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #777;
+    font-size: 1.5rem;
+  }
+
+  .cpd-records .rating {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+
+  .cpd-records .rating-label {
+    margin-right: 15px;
+    color: var(--text-color);
+    font-weight: 500;
+  }
+
+  /* Star Rating System */
+  .cpd-records .stars {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: flex-end;
+  }
+
+  .cpd-records .stars input {
+    display: none;
+  }
+
+  .cpd-records .stars label {
+    font-size: 24px;
+    color: var(--star-inactive);
+    cursor: pointer;
+    padding: 0 2px;
+    transition: color 0.2s;
+  }
+
+  /* When a star or any star after it is hovered, color them gold */
+  .cpd-records .stars label:hover,
+  .cpd-records .stars label:hover ~ label {
+    color: var(--star-active);
+  }
+
+  /* When a star is checked, color it and all stars after it gold */
+  .cpd-records .stars input:checked ~ label {
+    color: var(--star-active);
+  }
+
+  .cpd-records .input-group {
+    margin-bottom: 20px;
+  }
+
+  .cpd-records .form-input {
+    width: 100%;
+    padding: 12px 15px;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: border-color 0.3s;
+    outline: none;
+  }
+
+  .cpd-records .form-input:focus {
+    border-color: var(--primary-color);
+  }
+
+  .cpd-records .checkbox-group {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+
+  .cpd-records .checkbox-input {
+    width: 20px;
+    height: 20px;
+    margin-right: 10px;
+    cursor: pointer;
+    accent-color: var(--primary-color);
+  }
+
+  .cpd-records input[type=checkbox], 
+  .cpd-records input[type=radio] {
+    width: 17px;
+    height: 17px;
+    margin-right: 10px;
+  }
+
+  .cpd-records .checkbox-label {
+    color: var(--text-color);
+    font-size: 1rem;
+  }
+
+  .cpd-records .submit-btn {
+    background-color: var(--primary-color);
+    color: white;
+    border: 1px solid var(--primary-color);
+    padding: 14px 20px;
+    border-radius: 4px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s;
+    width: 100%;
+    font-weight: 400;
+    text-align: center;
+    margin: 0;
+    display: inline-block;
+  }
+
+  .cpd-records .toggle-form:hover,
+  .cpd-records .submit-btn:hover {
+    background-color: #20263e;
+    color: white;
+    transition: all 0.3s;
+  }
+
+   .toggle-form {
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    padding: 14px 20px;
+    border-radius: 4px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+    width: 100%;
+    font-weight: 400;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #7ec2c3;
+    color: black;
+    margin-top: 20px;
+  } 
+
+   .toggle-form::before {
+    content: '📝 ';
+    margin-right: 8px;
+  }
+
+  button#toggle-btn:disabled {
+    background: #1b2852;
+}
+
+button#toggle-btn:disabled:before{
+  display: none;
+}
+</style>
+{% end_require_css %}

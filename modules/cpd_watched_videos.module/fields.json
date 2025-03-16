@@ -1,0 +1,11 @@
+[
+  {
+    "default": "<h1>Your Watch History</h1>",
+    "label": "Title",
+    "locked": false,
+    "name": "text",
+    "required": false,
+    "type": "richtext",
+    "validation_regex": ""
+  }
+]

@@ -1,0 +1,82 @@
+{
+  "embed_field.label" : {
+    "message" : "Manusta",
+    "description" : "",
+    "placeholders" : null
+  },
+  "hubdbrow_field.default" : {
+    "message" : "",
+    "description" : null,
+    "placeholders" : null
+  },
+  "hubdbrow_field.help_text" : {
+    "message" : "",
+    "description" : null,
+    "placeholders" : null
+  },
+  "hubdbrow_field.inline_help_text" : {
+    "message" : "",
+    "description" : null,
+    "placeholders" : null
+  },
+  "hubdbrow_field.label" : {
+    "message" : "HubDB row",
+    "description" : null,
+    "placeholders" : null
+  },
+  "hubdbrow_field.placeholder" : {
+    "message" : "",
+    "description" : null,
+    "placeholders" : null
+  },
+  "hubspot_video.label" : {
+    "message" : "HubSpoti video",
+    "description" : "",
+    "placeholders" : null
+  },
+  "name" : {
+    "message" : "CPD Video",
+    "description" : null,
+    "placeholders" : null
+  },
+  "oembed_thumbnail.label" : {
+    "message" : "Kohandatud pisipilt",
+    "description" : "",
+    "placeholders" : null
+  },
+  "placeholder_fields.placeholder_description.default" : {
+    "message" : "Valige külgribal video tüüp.",
+    "description" : "",
+    "placeholders" : null
+  },
+  "placeholder_fields.placeholder_title.default" : {
+    "message" : "Videot ei ole valitud",
+    "description" : "",
+    "placeholders" : null
+  },
+  "style_options.label" : {
+    "message" : "Stiili valikud",
+    "description" : "",
+    "placeholders" : null
+  },
+  "style_options.oembed_thumbnail_play_button_color.label" : {
+    "message" : "Esitamisnupu värv",
+    "description" : "",
+    "placeholders" : null
+  },
+  "video_type.choices.embed" : {
+    "message" : "Manusta",
+    "description" : "",
+    "placeholders" : null
+  },
+  "video_type.choices.hubspot_video" : {
+    "message" : "HubSpoti video",
+    "description" : "",
+    "placeholders" : null
+  },
+  "video_type.label" : {
+    "message" : "Video tüüp",
+    "description" : "",
+    "placeholders" : null
+  }
+}

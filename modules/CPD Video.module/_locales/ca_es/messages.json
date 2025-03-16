@@ -1,0 +1,82 @@
+{
+  "embed_field.label" : {
+    "message" : "Incrusta",
+    "description" : "",
+    "placeholders" : null
+  },
+  "hubdbrow_field.default" : {
+    "message" : "",
+    "description" : null,
+    "placeholders" : null
+  },
+  "hubdbrow_field.help_text" : {
+    "message" : "",
+    "description" : null,
+    "placeholders" : null
+  },
+  "hubdbrow_field.inline_help_text" : {
+    "message" : "",
+    "description" : null,
+    "placeholders" : null
+  },
+  "hubdbrow_field.label" : {
+    "message" : "HubDB row",
+    "description" : null,
+    "placeholders" : null
+  },
+  "hubdbrow_field.placeholder" : {
+    "message" : "",
+    "description" : null,
+    "placeholders" : null
+  },
+  "hubspot_video.label" : {
+    "message" : "Vídeo de HubSpot",
+    "description" : "",
+    "placeholders" : null
+  },
+  "name" : {
+    "message" : "CPD Video",
+    "description" : null,
+    "placeholders" : null
+  },
+  "oembed_thumbnail.label" : {
+    "message" : "Miniatura personalitzada",
+    "description" : "",
+    "placeholders" : null
+  },
+  "placeholder_fields.placeholder_description.default" : {
+    "message" : "Selecciona un tipus de vídeo a la barra lateral.",
+    "description" : "",
+    "placeholders" : null
+  },
+  "placeholder_fields.placeholder_title.default" : {
+    "message" : "No s'ha seleccionat cap vídeo",
+    "description" : "",
+    "placeholders" : null
+  },
+  "style_options.label" : {
+    "message" : "Opcions de l'estil",
+    "description" : "",
+    "placeholders" : null
+  },
+  "style_options.oembed_thumbnail_play_button_color.label" : {
+    "message" : "Color del botó Reprodueix",
+    "description" : "",
+    "placeholders" : null
+  },
+  "video_type.choices.embed" : {
+    "message" : "Incrusta",
+    "description" : "",
+    "placeholders" : null
+  },
+  "video_type.choices.hubspot_video" : {
+    "message" : "Vídeo de HubSpot",
+    "description" : "",
+    "placeholders" : null
+  },
+  "video_type.label" : {
+    "message" : "Tipus de vídeo",
+    "description" : "",
+    "placeholders" : null
+  }
+}

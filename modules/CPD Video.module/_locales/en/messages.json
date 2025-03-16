@@ -1,0 +1,147 @@
+{
+  "embed_field.default" : {
+    "message" : "",
+    "description" : null,
+    "placeholders" : null
+  },
+  "embed_field.help_text" : {
+    "message" : "",
+    "description" : null,
+    "placeholders" : null
+  },
+  "embed_field.inline_help_text" : {
+    "message" : "",
+    "description" : null,
+    "placeholders" : null
+  },
+  "embed_field.label" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "embed_field.placeholder" : {
+    "message" : "",
+    "description" : null,
+    "placeholders" : null
+  },
+  "hubdbrow_field.default" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "hubdbrow_field.default.id" : {
+    "message" : "",
+    "description" : null,
+    "placeholders" : null
+  },
+  "hubdbrow_field.help_text" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "hubdbrow_field.inline_help_text" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "hubdbrow_field.label" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "hubdbrow_field.placeholder" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "hubspot_video.default" : {
+    "message" : "",
+    "description" : null,
+    "placeholders" : null
+  },
+  "hubspot_video.help_text" : {
+    "message" : "",
+    "description" : null,
+    "placeholders" : null
+  },
+  "hubspot_video.inline_help_text" : {
+    "message" : "",
+    "description" : null,
+    "placeholders" : null
+  },
+  "hubspot_video.label" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "hubspot_video.placeholder" : {
+    "message" : "",
+    "description" : null,
+    "placeholders" : null
+  },
+  "name" : {
+    "message" : "CPD Video",
+    "description" : "",
+    "placeholders" : null
+  },
+  "oembed_thumbnail.label" : {
+    "message" : "Custom thumbnail",
+    "description" : "",
+    "placeholders" : null
+  },
+  "placeholder_fields.placeholder_description.default" : {
+    "message" : "Select a video type in the sidebar.",
+    "description" : "",
+    "placeholders" : null
+  },
+  "placeholder_fields.placeholder_title.default" : {
+    "message" : "No video selected",
+    "description" : "",
+    "placeholders" : null
+  },
+  "style_options.label" : {
+    "message" : "Style options",
+    "description" : "",
+    "placeholders" : null
+  },
+  "style_options.oembed_thumbnail_play_button_color.label" : {
+    "message" : "Play button color",
+    "description" : "",
+    "placeholders" : null
+  },
+  "video_type.choices.embed" : {
+    "message" : "Embed",
+    "description" : "",
+    "placeholders" : null
+  },
+  "video_type.choices.hubspot_video" : {
+    "message" : "HubSpot video",
+    "description" : "",
+    "placeholders" : null
+  },
+  "video_type.default" : {
+    "message" : "",
+    "description" : null,
+    "placeholders" : null
+  },
+  "video_type.help_text" : {
+    "message" : "",
+    "description" : null,
+    "placeholders" : null
+  },
+  "video_type.inline_help_text" : {
+    "message" : "",
+    "description" : null,
+    "placeholders" : null
+  },
+  "video_type.label" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "video_type.placeholder" : {
+    "message" : "",
+    "description" : null,
+    "placeholders" : null
+  }
+}

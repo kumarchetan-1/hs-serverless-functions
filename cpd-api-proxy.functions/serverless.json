@@ -1,0 +1,19 @@
+{
+    "runtime": "nodejs18.x",
+    "version": "1.0",
+    "secrets": ["HUBSPOT_ACCESS_TOKEN"],
+    "endpoints": {
+    "search-cpd-records": {
+        "method": "POST",
+        "file": "search-cpd-records.js"
+      },
+      "create-cpd-record": {
+        "method": "POST",
+        "file": "create-cpd-record.js"
+      },
+      "get-cpd-record-details": {
+        "method": "GET",
+        "file": "get-cpd-record-details.js"
+      }
+    }
+  }

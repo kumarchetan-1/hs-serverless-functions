@@ -1,0 +1,82 @@
+{
+  "embed_field.label" : {
+    "message" : "Incorpora",
+    "description" : "",
+    "placeholders" : null
+  },
+  "hubdbrow_field.default" : {
+    "message" : "",
+    "description" : null,
+    "placeholders" : null
+  },
+  "hubdbrow_field.help_text" : {
+    "message" : "",
+    "description" : null,
+    "placeholders" : null
+  },
+  "hubdbrow_field.inline_help_text" : {
+    "message" : "",
+    "description" : null,
+    "placeholders" : null
+  },
+  "hubdbrow_field.label" : {
+    "message" : "HubDB row",
+    "description" : null,
+    "placeholders" : null
+  },
+  "hubdbrow_field.placeholder" : {
+    "message" : "",
+    "description" : null,
+    "placeholders" : null
+  },
+  "hubspot_video.label" : {
+    "message" : "Video HubSpot",
+    "description" : "",
+    "placeholders" : null
+  },
+  "name" : {
+    "message" : "CPD Video",
+    "description" : null,
+    "placeholders" : null
+  },
+  "oembed_thumbnail.label" : {
+    "message" : "Miniatura personalizzata",
+    "description" : "",
+    "placeholders" : null
+  },
+  "placeholder_fields.placeholder_description.default" : {
+    "message" : "Seleziona un tipo di video dalla barra laterale.",
+    "description" : "",
+    "placeholders" : null
+  },
+  "placeholder_fields.placeholder_title.default" : {
+    "message" : "Nessun video selezionato",
+    "description" : "",
+    "placeholders" : null
+  },
+  "style_options.label" : {
+    "message" : "Opzioni stile",
+    "description" : "",
+    "placeholders" : null
+  },
+  "style_options.oembed_thumbnail_play_button_color.label" : {
+    "message" : "Colore pulsante Play",
+    "description" : "",
+    "placeholders" : null
+  },
+  "video_type.choices.embed" : {
+    "message" : "Incorpora",
+    "description" : "",
+    "placeholders" : null
+  },
+  "video_type.choices.hubspot_video" : {
+    "message" : "Video HubSpot",
+    "description" : "",
+    "placeholders" : null
+  },
+  "video_type.label" : {
+    "message" : "Tipo video",
+    "description" : "",
+    "placeholders" : null
+  }
+}

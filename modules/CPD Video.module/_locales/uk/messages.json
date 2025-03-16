@@ -1,0 +1,82 @@
+{
+  "embed_field.label" : {
+    "message" : "Вмонтувати",
+    "description" : "",
+    "placeholders" : null
+  },
+  "hubdbrow_field.default" : {
+    "message" : "",
+    "description" : null,
+    "placeholders" : null
+  },
+  "hubdbrow_field.help_text" : {
+    "message" : "",
+    "description" : null,
+    "placeholders" : null
+  },
+  "hubdbrow_field.inline_help_text" : {
+    "message" : "",
+    "description" : null,
+    "placeholders" : null
+  },
+  "hubdbrow_field.label" : {
+    "message" : "HubDB row",
+    "description" : null,
+    "placeholders" : null
+  },
+  "hubdbrow_field.placeholder" : {
+    "message" : "",
+    "description" : null,
+    "placeholders" : null
+  },
+  "hubspot_video.label" : {
+    "message" : "Відеозапис HubSpot",
+    "description" : "",
+    "placeholders" : null
+  },
+  "name" : {
+    "message" : "CPD Video",
+    "description" : null,
+    "placeholders" : null
+  },
+  "oembed_thumbnail.label" : {
+    "message" : "Користувацька мініатюра",
+    "description" : "",
+    "placeholders" : null
+  },
+  "placeholder_fields.placeholder_description.default" : {
+    "message" : "Вибрати тип відео в бічній панелі",
+    "description" : "",
+    "placeholders" : null
+  },
+  "placeholder_fields.placeholder_title.default" : {
+    "message" : "Не вибрано жодного відео",
+    "description" : "",
+    "placeholders" : null
+  },
+  "style_options.label" : {
+    "message" : "Параметри стилю",
+    "description" : "",
+    "placeholders" : null
+  },
+  "style_options.oembed_thumbnail_play_button_color.label" : {
+    "message" : "Колір кнопки для відтворення",
+    "description" : "",
+    "placeholders" : null
+  },
+  "video_type.choices.embed" : {
+    "message" : "Вмонтувати",
+    "description" : "",
+    "placeholders" : null
+  },
+  "video_type.choices.hubspot_video" : {
+    "message" : "Відеозапис HubSpot",
+    "description" : "",
+    "placeholders" : null
+  },
+  "video_type.label" : {
+    "message" : "Тип відеозапису",
+    "description" : "",
+    "placeholders" : null
+  }
+}

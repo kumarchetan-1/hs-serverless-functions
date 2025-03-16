@@ -1,0 +1,110 @@
+<!--
+    templateType: page
+    label: Page template
+    isAvailableForNewContent: true
+-->
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>{{ content.html_title }}</title>
+    <meta name="description" content="{{ content.meta_description }}">
+    {{ standard_header_includes }}
+
+    <script>
+// async function checkCPDRecord(contactId, hubdbRecordId) {
+//     try {
+//         const response = await fetch("https://community.drawingandtalking.com/_hcms/api/search-cpd-records", {
+//             method: "POST",
+//             headers: { "Content-Type": "application/json" },
+//             body: JSON.stringify({ contactId, hubdbRecordId })
+//         });
+
+//         if (!response.ok) {
+//             throw new Error(`HTTP error! Status: ${response.status}`);
+//         }
+
+//         const data = await response.json();
+//         console.log("🔍 API Response:", data);
+
+//         if (data.exists) {
+//             console.log(`✅ Record Found! ID: ${data.id}`);
+//             return { exists: true, id: data.id };
+//         } else {
+//             console.log("No record found.");
+//             return { exists: false };
+//         }
+
+//     } catch (error) {
+//         console.error("Error in fetching data:", error);
+//         return { exists: false, error: error.message };
+//     }
+// }
+
+// // Correctly handle async function
+// async function main() {
+//     const result = await checkCPDRecord(6193951, 869626439);
+//     console.log("Final Result:", result);
+// }
+
+// main();
+
+
+async function createCPDRecord(recordData) {
+    try {
+        const response = await fetch("https://community.drawingandtalking.com/_hcms/api/create-cpd-record", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(recordData)
+        });
+
+        if (!response.ok) {
+            const errorData = await response.json();
+            throw new Error(`HTTP error! Status: ${response.status}, Response: ${JSON.stringify(errorData)}`);
+        }
+
+        const data = await response.json();
+        console.log("📝 API Response:", data);
+
+        if (data.success) {
+            console.log(`✅ CPD Record Created! ID: ${data.id}`);
+            return { success: true, id: data.id, message: data.message };
+        } else {
+            console.log("⚠️ CPD Record creation failed.");
+            return { success: false, message: data.message || "Record creation failed." };
+        }
+
+    } catch (error) {
+        console.error("❌ Error in createCPDRecord:", error);
+        return { success: false, error: error.message };
+    }
+}
+
+// ✅ Example Usage
+async function main() {
+    const newRecord = {
+        recordName: "CPD Training Session 1",
+        hubdbRecordId: 890276929,
+        submissionDate: "2025-03-04",
+        rating: 5,
+        comment: "Great session!",
+        feedback: "Very informative.",
+        watched: true,
+        contactId: 6193951
+    };
+
+    const result = await createCPDRecord(newRecord);
+    console.log("Final Result:", result);
+}
+
+// Run the test function
+main();
+
+    </script>
+  </head>
+  <body>
+    {% module "page_template_logo" path="@hubspot/logo" label="Logo" %}
+    {% module "page_template_rich_text" path="@hubspot/rich_text" label="Rich Text" %}
+    {{ standard_footer_includes }}
+  </body>
+</html>
