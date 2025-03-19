@@ -8,35 +8,53 @@ function getVideoId() {
   const clonedEmbed = originalEmbed.cloneNode(true);
   clonedEmbed.id = "notes_embed_container";
 
-  const iframe = clonedEmbed.querySelector("iframe");
-  if (!iframe) {
-    console.error("No iframe found inside the cloned container.");
+  const iframeSrc = clonedEmbed.querySelector("iframe")?.getAttribute("src");
+  const videoId = iframeSrc?.match(/vimeo\.com\/video\/(\d+)/)?.[1];
+
+  if (!videoId) {
+    console.error("Vimeo video ID not found.");
     return null;
   }
 
-  const iframeSrc = iframe.getAttribute("src");
-  const match = iframeSrc?.match(/vimeo\.com\/video\/(\d+)/);
-  if (!match || !match[1]) {
-    // console.error("Vimeo video ID not found.");
-    return null;
-  }
-
-  const videoId = match[1];
   console.log("🎥 Vimeo Video ID:", videoId);
 
-  const targetContainer = document.querySelector(".cpd-records .video-container");
-  if (targetContainer) {
-    targetContainer.appendChild(clonedEmbed);
-  } else {
-    console.error("Target container '.cpd-records .video-container' not found.");
-  }
-
+  document.querySelector(".cpd-records .video-container")?.appendChild(clonedEmbed);
   return videoId;
+}
+
+async function fetchExistingRecord(contactId, videoId) {
+  try {
+    const response = await fetch("https://community.drawingandtalking.com/_hcms/api/search-cpd-records", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ contactId, videoId }),
+    });
+
+    return await response.json();
+  } catch (error) {
+    console.error("Error checking existing record:", error);
+    return null;
+  }
+}
+
+function disableButton(button, text) {
+  if (button) {
+    button.innerHTML = text;
+    button.disabled = true;
+  }
+}
+
+function updateToggleButton(existingData, toggleBtn) {
+  if (existingData?.exists) {
+    disableButton(toggleBtn, "Video already marked as watched video");
+  } else {
+    toggleBtn.disabled = false;
+    toggleBtn.innerText = "Take notes and mark video as watched." 
+  }
 }
 
 document.addEventListener("DOMContentLoaded", async () => {
   const videoId = getVideoId();
-  let hubdbRecordId = null
   if (!videoId) return;
 
   const contactId = document.querySelector(".cpd-records-reveal-btn")?.getAttribute("data-contactid");
@@ -45,87 +63,47 @@ document.addEventListener("DOMContentLoaded", async () => {
     return;
   }
 
-  try {
-    console.log("Checking for existing record...");
-    const existingResponse = await fetch("https://community.drawingandtalking.com/_hcms/api/search-cpd-records", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ contactId, videoId }),
-    });
+  const toggleBtn = document.getElementById("toggle-btn");
+  disableButton(toggleBtn, "Checking...");
 
-    const existingData = await existingResponse.json();
-    hubdbRecordId = existingData.hubdbRecordId
-    console.log(existingData);
-    if (existingData.exists) {
-      console.log(` Record Found! ID: ${existingData.id}`);
-      const toggleBtn = document.getElementById("toggle-btn");
-      if (toggleBtn) {
-        toggleBtn.innerText = "Video already marked as watched video";
-        toggleBtn.disabled = true
-      }
-    }
-  } catch (error) {
-    console.error(" Error checking existing record:", error);
-  }
+  let existingData = await fetchExistingRecord(contactId, videoId);
+  updateToggleButton(existingData, toggleBtn);
 
-  const submitBtn = document.querySelector(".cpd-records .submit-btn");
-  if (!submitBtn) {
-    console.error("Submit button not found.");
-    return;
-  }
-
-  submitBtn.addEventListener("click", async () => {
-    const recordName = document.title?.trim().replace(/["<>]/g, "") || "Untitled Video";
-    const midnightUTC = new Date();
-    midnightUTC.setUTCHours(0, 0, 0, 0);
-    const submissionDate = midnightUTC.getTime();
-    const rating = document.querySelector("input[name='rating']:checked")?.value ?? null;
-    const comment = document.querySelector("#notes")?.value.trim() ?? "";
-    const feedback = document.querySelector("#feedback")?.value.trim() ?? "";
+  document.querySelector(".cpd-records .submit-btn")?.addEventListener("click", async () => {
     const watched = document.querySelector("#watched")?.checked ?? false;
-
     if (!watched) {
       alert("Please confirm that you watched the video before submitting feedback.");
       return;
     }
 
-    try {
-      // console.log(" No existing record found. Creating new record...");
-      const cpdRecord = {
-        recordName,
-        hubdbRecordId: hubdbRecordId,
-        submissionDate,
-        rating,
-        comment,
-        feedback,
-        watched,
-        contactId,
-      };
+    const recordData = {
+      recordName: document.title?.trim().replace(/["<>]/g, "") || "Untitled Video",
+      hubdbRecordId: existingData?.hubdbRecordId,
+      submissionDate: new Date().setUTCHours(0, 0, 0, 0),
+      rating: document.querySelector("input[name='rating']:checked")?.value ?? null,
+      comment: document.querySelector("#notes")?.value.trim() ?? "",
+      feedback: document.querySelector("#feedback")?.value.trim() ?? "",
+      watched,
+      contactId,
+    };
 
-      // console.log("CPD record", JSON.stringify(cpdRecord));
-      const createResult = await createCPDRecord(cpdRecord);
+    if (!existingData?.exists) {
+      const createResult = await createCPDRecord(recordData);
       if (createResult.success) {
-        // console.log(` CPD Record Created! ID: ${createResult.id}`);
         document.querySelector(".cpd-records").style.display = "none";
       } else {
-        // console.log(" CPD Record Creation Failed:", createResult.message);
+        console.log("CPD Record Creation Failed:", createResult.message);
       }
-    } catch (error) {
-      console.error("Error:", error);
-      alert("Something went wrong! Please try again.");
+    } else {
+      disableButton(document.querySelector("#warning"), `<p style="color: red; margin-bottom: 5px;">A record already exists.</p>`)
+      disableButton(document.querySelector(".cpd-records .submit-btn"), "Can't submit duplicate entries.");
     }
   });
 });
 
-
-
 async function createCPDRecord(recordData) {
   const submitBtn = document.querySelector(".cpd-records .submit-btn");
-
-  if (submitBtn) {
-    submitBtn.innerText = "Submitting...";
-    submitBtn.disabled = true;
-  }
+  disableButton(submitBtn, "Submitting...");
 
   try {
     const response = await fetch("https://community.drawingandtalking.com/_hcms/api/create-cpd-record", {
@@ -135,22 +113,22 @@ async function createCPDRecord(recordData) {
     });
 
     const data = await response.json();
+
+    if (response.status === 409) {
+      console.warn("CPD record already exists.");
+      document.querySelector("#warning")?.insertAdjacentHTML("beforeend", `<p>${data}</p>`);
+      disableButton(document.getElementById("toggle-btn"), "Video already marked as watched");
+      return { success: false, message: "A CPD record already exists for this video." };
+    }
+
     if (!response.ok) {
       throw new Error(`HTTP error! Status: ${response.status}, Response: ${JSON.stringify(data)}`);
     }
 
-    // console.log(" API Response:", data);
-
-    if (data.id) {
-      const toggleBtn = document.getElementById("toggle-btn");
-      toggleBtn.innerText = "Successfully marked as watched video";
-      toggleBtn.disabled = true
-      return { success: true, id: data.id, message: "CPD record created successfully." };
-    } else {
-      return { success: false, message: "Record creation failed." };
-    }
+    disableButton(document.getElementById("toggle-btn"), "Successfully marked as watched video");
+    return { success: true, id: data.id, message: "CPD record created successfully." };
   } catch (error) {
-    // console.error(" Error in createCPDRecord:", error);
+    console.error("Error in createCPDRecord:", error);
     return { success: false, error: error.message };
   }
 }
