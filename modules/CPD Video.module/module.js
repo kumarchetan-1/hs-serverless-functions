@@ -63,7 +63,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     return;
   }
 
-  const toggleBtn = document.getElementById("toggle-btn");
+  let toggleBtn = document.getElementById("toggle-btn");
   disableButton(toggleBtn, "Checking...");
 
   let existingData = await fetchExistingRecord(contactId, videoId);
@@ -90,6 +90,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     if (!existingData?.exists) {
       const createResult = await createCPDRecord(recordData);
       if (createResult.success) {
+        // console.log("New hubdb data is: " + createResult.totalCPDHoursHoursHubDbId);
         document.querySelector(".cpd-records").style.display = "none";
       } else {
         console.log("CPD Record Creation Failed:", createResult.message);
@@ -102,7 +103,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 });
 
 async function createCPDRecord(recordData) {
-  const submitBtn = document.querySelector(".cpd-records .submit-btn");
+  let submitBtn = document.querySelector(".cpd-records .submit-btn");
   disableButton(submitBtn, "Submitting...");
 
   try {
@@ -113,11 +114,11 @@ async function createCPDRecord(recordData) {
     });
 
     const data = await response.json();
-
+    let toggleBtn = document.getElementById("toggle-btn")
     if (response.status === 409) {
       console.warn("CPD record already exists.");
       document.querySelector("#warning")?.insertAdjacentHTML("beforeend", `<p>${data}</p>`);
-      disableButton(document.getElementById("toggle-btn"), "Video already marked as watched");
+      disableButton(toggleBtn, "Video already marked as watched");
       return { success: false, message: "A CPD record already exists for this video." };
     }
 
@@ -125,10 +126,10 @@ async function createCPDRecord(recordData) {
       throw new Error(`HTTP error! Status: ${response.status}, Response: ${JSON.stringify(data)}`);
     }
 
-    disableButton(document.getElementById("toggle-btn"), "Successfully marked as watched video");
-    return { success: true, id: data.id, message: "CPD record created successfully." };
+    disableButton(toggleBtn, "Successfully marked as watched video");
+    return { totalCPDHoursHoursHubDbId: data.totalCPDHoursHoursHubDbId, success: true, id: data.id, message: "CPD record created successfully." };
   } catch (error) {
     console.error("Error in createCPDRecord:", error);
     return { success: false, error: error.message };
-  }
+  } 
 }
