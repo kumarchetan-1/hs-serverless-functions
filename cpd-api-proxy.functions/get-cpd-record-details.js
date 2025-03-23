@@ -1,5 +1,6 @@
 const HUBSPOT_ACCESS_TOKEN = process.env.HUBSPOT_ACCESS_TOKEN;
 const axios = require("axios");
+const PORTAL_ID =  process.env.PORTAL_ID
 
 exports.main = async (context, sendResponse) => {
   try {
@@ -8,9 +9,9 @@ exports.main = async (context, sendResponse) => {
     if (!contactId) {
       sendResponse({
         statusCode: 400,
-        body: { message: "Missing contactId parameter." },
+        body: { message: "Missing contactId parameter." }, 
       });
-      return;
+      return; 
     }
 
     const ASSOCIATION_TYPE_ID = "associationType=150"; // Association ID for watched_by_watched_videos
@@ -52,7 +53,7 @@ exports.main = async (context, sendResponse) => {
       const tableName = "elearning_table"; // Your table name
       const hubdbRecordIdToFind = hubdbRecordId; // Replace with the actual hubdbRecordId
   
-      const hubdbUrl = `https://api.hubapi.com/cms/v3/hubdb/tables/${tableName}/rows?portalId=25717290`;
+      const hubdbUrl = `https://api.hubapi.com/cms/v3/hubdb/tables/${tableName}/rows?portalId=${PORTAL_ID}`;
       let videoIdFound = null;
       try {
         const hubDb_response = await fetch(hubdbUrl, {

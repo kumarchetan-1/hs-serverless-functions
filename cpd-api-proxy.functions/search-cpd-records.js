@@ -1,5 +1,6 @@
 const HUBSPOT_API_URL = "https://api.hubapi.com/crm/v3/objects/p_cpd_records";
 const HUBSPOT_ACCESS_TOKEN = process.env.HUBSPOT_ACCESS_TOKEN; // Securely stored token
+const PORTAL_ID =  process.env.PORTAL_ID
 
 // Helper function for making API calls to HubSpot
 async function fetchFromHubSpot(url, method = "GET", body = null) {
@@ -11,7 +12,7 @@ async function fetchFromHubSpot(url, method = "GET", body = null) {
         "Content-Type": "application/json",
       },
     };
-
+ 
     if (body) {
       options.body = JSON.stringify(body);
     }
@@ -51,7 +52,7 @@ exports.main = async (context, sendResponse) => {
 
     // Fetch video record from HubDB
     const tableName = "elearning_table";
-    const hubdbUrl = `https://api.hubapi.com/cms/v3/hubdb/tables/${tableName}/rows?portalId=25717290`;
+    const hubdbUrl = `https://api.hubapi.com/cms/v3/hubdb/tables/${tableName}/rows?portalId=${PORTAL_ID}`;
 
     const hubDbData = await fetchFromHubSpot(hubdbUrl);
     const hubdbRecordId = hubDbData?.results?.find((row) => row.values?.video_id === videoId)?.id || null;
